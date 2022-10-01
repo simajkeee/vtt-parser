@@ -14,10 +14,13 @@ class Transcription
         return new static(file($path, FILE_IGNORE_NEW_LINES));
     }
 
+    /**
+     * @return Line[]
+     */
     public function lines(): array
     {
         $lines = [];
-        for ($i = 0; $i < count($this->lines); $i+=2) {
+        for ($i = 0; $i < count($this->lines); $i += 2) {
             $lines[] = new Line($this->lines[$i], $this->lines[$i + 1]);
         }
         return $lines;
@@ -29,9 +32,17 @@ class Transcription
             return Line::valid($line);
         }));
     }
-    
+
+    public function htmlLines(): string
+    {
+        return implode("\n", array_map(
+            fn($line) => $line->toAnchorTag(),
+            $this->lines()
+        ));
+    }
+
     public function __toString(): string
     {
-        return implode("", $this->lines);
+        return implode("\n", $this->lines);
     }
 }

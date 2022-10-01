@@ -47,4 +47,21 @@ class TranscriptionTest extends TestCase
 
         $this->assertCount(2, $transcription->lines());
     }
+
+    /**
+     * @test
+     */
+    function it_renders_the_lines_as_html()
+    {
+        $transcription = Transcription::load(__DIR__ . '/stubs/basic-example.vtt');
+
+        $expected = <<<EOT
+<a href="?time=00:03">Here is a</a>
+<a href="?time=00:04">example of a VTT file.</a>
+EOT;
+
+        $result = $transcription->htmlLines();
+
+        $this->assertEquals($expected, $result);
+    }
 }
