@@ -1,15 +1,19 @@
 {
     "name": "simajkeee/transcriptions",
+    "description": "Load and parse VTT files",
     "authors": [
         {
-            "name": "simajkeee",
-            "email": "37087698+simajkeee@users.noreply.github.com"
+            "name": "Alexandr Karelin",
+            "email": "simajkeee@gmail.com"
         }
     ],
     "autoload": {
         "psr-4": {
             "Simajkeee\\Transcriptions\\": "src/"
         }
+    },
+    "require": {
+        "php": ">= 8.0"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5"

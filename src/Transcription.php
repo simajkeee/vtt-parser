@@ -19,18 +19,15 @@ class Transcription
      */
     public function lines(): array
     {
-        $lines = [];
-        for ($i = 0; $i < count($this->lines); $i += 2) {
-            $lines[] = new Line($this->lines[$i], $this->lines[$i + 1]);
-        }
-        return $lines;
+        return array_map(
+            fn($line) => new Line(...$line),
+            array_chunk($this->lines, 3)
+        );
     }
 
     protected function discardInvalidLines(array $lines): array
     {
-        return array_values(array_filter($lines, function ($line) {
-            return Line::valid($line);
-        }));
+        return array_slice(array_filter($lines), 1);
     }
 
     public function htmlLines(): string

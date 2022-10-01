@@ -5,13 +5,8 @@ namespace Simajkeee\Transcriptions;
 class Line
 {
 
-    public function __construct(public string $timestamp, public string $text)
+    public function __construct(public int $position, public string $timestamp, public string $text)
     {
-    }
-
-    public static function valid(string $line)
-    {
-         return trim($line) !== 'WEBVTT' && $line != '' && !is_numeric($line);
     }
 
     public function getBeginningTimestamp()
